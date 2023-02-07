@@ -92,3 +92,5 @@ class BookInStock
     format("$%.2f" % [@price])
   end
 end
+
+# this is just a comment

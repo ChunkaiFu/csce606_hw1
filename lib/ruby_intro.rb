@@ -30,7 +30,7 @@ def sum_to_n?(arr, number)
   arr.combination(2).any? {|x,y| x+y == number}
 end
 
-=begin 
+
 # Part 2
 
 def hello(name)
@@ -38,13 +38,14 @@ def hello(name)
   return var
 end
 
+
 def starts_with_consonant?(string)
-  if s.length == 0
+  if string.length == 0
     return false
   end
-  if ('A'..'Z').include?(s[0].upcase)
+  if ('A'..'Z').include?(string[0].upcase)
     var = ['A','E','I','O','U']
-    if var.include?(s[0].upcase)
+    if var.include?(string[0].upcase)
     return false
     end
   return true
@@ -53,19 +54,23 @@ def starts_with_consonant?(string)
 end
 
 def binary_multiple_of_4?(string)
-  is = s.to_i
-    if s == "0"
+  if (string.empty?)
+    return false 
+  end
+  is = string.to_i
+    if is == "0"
       return true
-    elsif /[a-zA-Z^$3-9*]/.match(s)
+    elsif /[a-zA-Z^$3-9*]/.match(string)
       return false
     else
-      if /^[10]*00$/.match(s) && is % 2 == 0
+      if /^[10]*$/.match(string) && is % 2 == 0
         return true
       else
         return false
       end
     end
 end
+
 
 # Part 3
 
@@ -75,19 +80,15 @@ class BookInStock
   attr_accessor :price
   
   def initialize(isbn, price)
+    raise ArgumentError if (isbn.empty? or price <= 0)
     @isbn = isbn
     @price = Float(price)
   end
   
-  def to_s
-    "ISBN: #{@isbn}, price: #{@price}"
+  def isbn=(a)
+    @isbn=a
+  end 
+  def price_as_string
+    format("$%.2f" % [@price])
   end
-  
-  book = BookInStock.new("isbn1", 33.80)
-  puts "ISBN = #{book.isbn}"
-  puts "Price = #{book.price}"
-  book.price = book.price * 0.75
-  puts "New price = #{book.price}"
 end
-
-=end 
